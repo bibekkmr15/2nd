@@ -1,11 +1,17 @@
 const mongoose = require("mongoose");
 const Review = require("./review");
+const { string } = require("joi");
 // you can do the following line to shortened the code
 const Schema = mongoose.Schema;
 
 const CampgroundSchema = new Schema({
   title: String,
-  image: String,
+  images: [
+    {
+      url: String,
+      filename: String,
+    },
+  ],
   price: Number,
   description: String,
   location: String,

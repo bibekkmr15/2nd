@@ -4,9 +4,8 @@ const catchAsync = require("../utilities/catchAsync");
 const { isLoggedIn, validateCampground, isAuthor } = require("../middleware");
 const campgrounds = require("../controllers/campgrounds");
 const multer = require("multer");
-// store data in destination folder named uploads (bad idea), we are using this temporarily.
-// it's best to use cloud storage like AWS or Cloudinary
-const upload = multer({ dest: "uploads/" });
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
 
 router
   .route("/")
@@ -16,11 +15,6 @@ router
   //   validateCampground,
   //   catchAsync(campgrounds.createCampground)
   // );
-  // // for single file
-  // .post(upload.single("image"), (req, res) => {
-  // console.log(req.body, req.file);
-  // res.send("it worked");
-  // for multiple files
   .post(upload.array("image"), (req, res) => {
     console.log(req.body, req.files);
     res.send("it worked");
