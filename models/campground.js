@@ -5,14 +5,23 @@ const { cloudinary } = require("../cloudinary");
 // you can do the following line to shortened the code
 const Schema = mongoose.Schema;
 
+// what we have
+// https://res.cloudinary.com/dnx2g5cov/image/upload/v1686901510/YelpCamp/dn03onqwwzev6atjvrng.jpg
+// what we want
+// https://res.cloudinary.com/dnx2g5cov/image/upload/w_200/v1686901510/YelpCamp/dn03onqwwzev6atjvrng.jpg
+
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+
+ImageSchema.virtual("thumbnail").get(function () {
+  return this.url.replace("/upload", "/upload/w_200");
+});
+
 const CampgroundSchema = new Schema({
   title: String,
-  images: [
-    {
-      url: String,
-      filename: String,
-    },
-  ],
+  images: [ImageSchema],
   price: Number,
   description: String,
   location: String,
