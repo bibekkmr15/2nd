@@ -50,8 +50,10 @@ module.exports.updateCampground = async (req, res) => {
   const campground = await Campground.findByIdAndUpdate(id, {
     ...req.body.campground,
   });
-  const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
-  campground.images.push(...imgs);
+  if (req.files.length > 0) {
+    const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
+    campground.images.push(...imgs);
+  }
   // you can modify this because here we get 2 update calls once findByIdAndUpdate before and than save in next line
   await campground.save();
   if (req.body.deleteImages) {
@@ -62,7 +64,7 @@ module.exports.updateCampground = async (req, res) => {
       $pull: { images: { filename: { $in: req.body.deleteImages } } },
     });
   }
-  console.log(campground);
+  // console.log(campground);
   req.flash("success", "Successfully updated campground!");
   res.redirect(`/campgrounds/${campground.id}`);
 };
