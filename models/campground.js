@@ -41,7 +41,14 @@ const CampgroundSchema = new Schema({
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 });
 
-// mongoose middleware
+CampgroundSchema.virtual("properties.popUpMarkup").get(function () {
+  return `<strong><a href="/campgrounds/${this.id}">${this.title}</a></strong>
+  <p>${this.description.substring(0, 20)}...</p>`;
+});
+
+CampgroundSchema.set("toJSON", { virtuals: true });
+
+// mongoose middleware to delete campground related data after deleting a campground
 CampgroundSchema.post("findOneAndDelete", async function (doc) {
   if (doc) {
     // delete associated reviews
