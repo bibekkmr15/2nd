@@ -59,7 +59,7 @@
     </div>
     <div class="col-6">
             <!-- for map integration from mapbox -->
-            <div id='map' style='width: 600px; height: 300px;'></div>
+            <div id='map'></div>
       <% if(currentUser) { %>
         <h2>Leave a Review</h2>
         <form action="/campgrounds/<%= campground.id %>/reviews" method="post" class="mb-3 validated-form" novalidate>
