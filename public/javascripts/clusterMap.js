@@ -11,6 +11,10 @@ const map = new mapboxgl.Map({
   zoom: 3,
 });
 
+// Add zoom and rotation controls to the map. -
+// from docs - https://docs.mapbox.com/mapbox-gl-js/example/navigation/  and https://docs.mapbox.com/mapbox-gl-js/api/markers/#navigationcontrol
+map.addControl(new mapboxgl.NavigationControl());
+
 map.on("load", () => {
   // Add a new source from our GeoJSON data and
   // set the 'cluster' option to true. GL-JS will

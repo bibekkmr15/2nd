@@ -7,6 +7,10 @@ const map = new mapboxgl.Map({
   zoom: 10, // starting zoom
 });
 
+// Add zoom and rotation controls to the map. -
+// from docs - https://docs.mapbox.com/mapbox-gl-js/example/navigation/  and https://docs.mapbox.com/mapbox-gl-js/api/markers/#navigationcontrol
+map.addControl(new mapboxgl.NavigationControl());
+
 // Create a default Marker and add it to the map
 const marker1 = new mapboxgl.Marker()
   .setLngLat(campground.geometry.coordinates)
