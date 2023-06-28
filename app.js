@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
 }
+// require("dotenv").config(); // for testing in production mode
 
 // console.log(process.env.SECRET);
 
