@@ -41,6 +41,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize({ replaceWith: "_" }));
 
 const sessionConfig = {
+  name: "session", //New name of the cookie
   secret: "thisShouldBeABetterSecret",
   resave: false,
   saveUninitialized: true,
@@ -48,6 +49,7 @@ const sessionConfig = {
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
     httpOnly: true,
+    // secure: true, //Using secure, so cookies are only accessible through HTTPS
   },
 };
 
