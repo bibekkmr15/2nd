@@ -24,10 +24,14 @@ const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
 
+// const dbUrl = process.env.DB_URL; // for online database on cloud mongodb
+const dbUrl = "mongodb://127.0.0.1:27017/yelp-camp"; // for local database on device
+
 // connect to mongoose
 main().catch((err) => console.log(err));
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp");
+  // await mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp"); // for local database on device
+  await mongoose.connect(dbUrl);
   console.log("Database connected");
 }
 
